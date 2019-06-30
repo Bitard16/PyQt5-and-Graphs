@@ -1,0 +1,133 @@
+self.scene.setSceneRect(0,0,300,200)
+
+        self.view.setScene(self.scene)
+        self.scene.addPixmap(QPixmap('Graph.png'))
+        self.scene.setBackgroundBrush(QBrush(Qt.blue, Qt.SolidPattern))
+                
+        tb = self.addToolBar('Menu')
+        saveAction = QAction('Save', self)
+        tb.addAction(saveAction)
+                
+        hbox = QGridLayout(self)
+                
+        hbox.addWidget(tb,1,1)
+        hbox.addWidget(self.view,2,2)
+                
+        self.win.setLayout(hbox)
+
+for i in range(n):
+            t=abc.readline()
+            r=t.split()
+            x=int(r[0])
+            y=int(r[1])
+            z=int(r[2])
+            G.add_edge(x, y, weight=z)
+            abc.close()
+            n=int(input())
+            k=int(input())
+            a=[[float('inf'), i+1] for i in range(m)]
+            a[n-1][0]=0
+            b=[]
+            for i in range(m):
+                b.append([])
+                b[n-1]=[n]
+                c=[]
+                e=[i for i in range(1, m+1)]
+                while True:
+                    for i in range(len(e)):
+                        found = False
+                        if e[i] not in c:
+                            found=True
+                            break
+                        if not found:
+                            break
+                        f=[]
+                        for i in a:
+                            if i[1] not in c:
+                                f.append(i)
+                                g=[]
+                                for i in range(len(f)):
+                                    g.append(f[i][0])
+                                    v1=min(g)
+                                    for i in f:
+                                        if i[0]==v1:
+                                            v=i[1]
+                                            break
+                                        c.append(v)
+                                        for u in G[v]:
+                                            if u not in c:
+                                                if a[u-1][0]>a[v-1][0]+G[v][u]['weight']:
+                                                    a[u-1][0]=a[v-1][0]+G[v][u]['weight']
+                                                    b[u-1]=[]
+                                                    for i in range(len(b[v-1])):
+                                                        b[u-1].append(b[v-1][i])
+                                                        b[u-1].append(u)
+                                                        print(b[k-1])
+                                                        return b[k-1]        self.win.show()
+class priority_queue():
+            def __init__(self):
+                self.queue = list()
+                heapify(self.queue)
+                self.index = dict()
+            def push(self,priority,label):
+                if label in self.index:
+                    self.queue = [(w,l) for w,l in self.queue if l!= label]
+                    heapify(self.queue)
+                    heappush(self.queue,(priority,label))
+                    self.index[label] = priority
+            def pop(self):
+                if self.queue:
+                    return heappop(self.queue)
+            def __contains__(self, label):
+                return label in self.index
+            def __len__(self):
+                return len(self.queue)
+
+
+        def dijkstra(graph,start,end):
+            inf = float('inf')
+            known = set()
+            priority = priority_queue()
+            path = {start: start}
+            for vertex in graph:
+                if vertex == start:
+                    priority.push(0,vertex)
+                else:
+                    priority.push(inf, vertex)
+
+            last = start
+            while last != end:
+                (weight, actual_node) = priority.pop()
+                if actual_node not in known:
+                    for next_node in graph[actual_node]:
+                        upto_actual = priority.index[actual_node]
+                        upto_next = priority.index[next_node]
+                        to_next = upto_actual +  graph[actual_node][next_node]# Здесь возможна ошибка
+                        if to_next < upto_next:
+                            priority.push(to_next,next_node)
+                            self.textEdit_3.append("Найден более короткий путь из %s в %s" %(actual_node,next_node))
+                            self.textEdit_3.append("\t Общая длина в настоящий момент: %i" %to_next)
+                            path[next_node] = actual_node
+                    last = actual_node
+                    known.add(actual_node)
+    #return priority.index, path
+            return  path
+            
+            
+ self.scene.setSceneRect(0,0,300,200)
+
+            self.view.setScene(self.scene)
+            self.scene.addPixmap(QPixmap(savepic))
+            self.scene.setBackgroundBrush(QBrush(Qt.blue, Qt.SolidPattern))
+                    
+            tb = self.addToolBar('Menu')
+            saveAction = QAction('Save', self)
+            tb.addAction(saveAction)
+                    
+            hbox = QGridLayout(self)
+                    
+            hbox.addWidget(tb,1,1)
+            hbox.addWidget(self.view,2,2)
+                    
+            self.win.setLayout(hbox)
+            self.win.show()
